@@ -1,0 +1,60 @@
+DIM_NT=['adrar','chlef','laghouat','oum el bouaghi','batna','bedjaia','biskra','bechar','blida','bouira','tamanrasset','tebessa','tlemcen','tiaret','tizi ouzou','Béni Abbès ','ain guezzam','Touggourt','Djanet ','El M\'Ghair','Meniaa'
+     'alger','djelfa','jijel','setif','saida','skikda','sidi bel abbes','annaba','gheulma',"constantine",'medea','mostghanem','Khenchela','mila','ain defla ','Ghardaïa','Timimoun','ain salah','Bordj Badji Mokhtar','Ouled Djellal '
+     ,'MSila','Mascara','Ouargla','Oran',' el Bayadh','Illizi','Bordj Bou Arreridj','Boumerdès','Tindouf','Tissemsilt','el oued','Souk Ahras','tipaza','Naâma','Témouchent','Relizane']
+
+
+
+ if(table[0][2]!=None):
+  year=0
+  mois=0
+
+  if table[0][2][1]==1:
+    date1=re.search(r'\w+\s+(199[0-9]|20[0-2][0-9])',table[0][2][0]) 
+    if date1!=None:
+     st=date1.group()  
+     y=re.search(r'(199[0-9]|20[0-2][0-9])',st)
+     st=st.replace(y.group(),'')
+     year=y.group()
+     mois=st.replace(' ','')
+     try:
+        if type(int(mois))==int :
+          pass
+     except: 
+       mois=m_by_nbr(mois)
+  elif table[0][2][1]==2:
+      date2=re.search(r'([/|-]|,|.)\s*\w+\s*([/|-]|,|.)\s*(199[0-9]|20[0-2][0-9])',table[0][2][0])
+      if date2!=None:
+        st=date2.group()  
+        y=re.search(r'(199[0-9]|20[0-2][0-9])',st)
+        st=st.replace(y.group(),'')
+        pt=re.search(r'([/|-]|,|.)',st)
+        st=st.replace(pt.group(),'')
+        st=st.replace(' ','')
+        mois=st
+        year=y.group()
+        try:
+         if type(int(mois))==int :
+          pass
+        except: 
+           mois=m_by_nbr(mois)
+  elif table[0][2][1]==3:
+     date3=re.search(r'(january|february|march|april|may|june|july|august|september|october|november|december)',table[0][2][0])
+     mois=m_by_nbr(date3.group())
+     date3=re.search(r'(199[0-9]|20[0-2][0-9])',table[0][2][0])   
+     year=date3.group()
+
+  elif table[0][2][1]==4:    
+     date4=re.search(r'(january|february|march|april|may|june|july|august|september|october|november|december)',table[0][2][0])
+     mois=m_by_nbr(date4.group())
+     date4=re.search(r'(199[0-9]|20[0-2][0-9])',table[0][2][0])   
+     year=date4.group()
+
+  elif table[0][2][1]==5: 
+    date5=re.search(r'(199[0-9]|20[0-2][0-9])',table[0][2][0])   
+    year=date5.group()
+  
+  elif table[0][2][1]==6:
+    date6=re.search(r'(january|february|march|april|may|june|july|august|september|october|november|december)',table[0][2][0])
+    mois=m_by_nbr(date6.group())
+  print(mois)
+  print(year)  
